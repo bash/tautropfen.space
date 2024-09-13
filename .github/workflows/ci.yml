@@ -1,0 +1,42 @@
+name: Build Website
+
+on:
+  push:
+
+env:
+  NPM_CONFIG_FUND: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: taiki-e/install-action@v2
+      with:
+        tool: zola@0.19.1
+
+    - name: Build Site
+      run: zola build
+
+    - name: Upload GitHub Pages Artifact
+      uses: actions/upload-pages-artifact@v3
+
+  deploy_pages:
+    needs: build
+    if: github.ref_name == 'main'
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

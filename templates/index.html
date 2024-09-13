@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block main_content %}
+{{section.content | safe}}
+
+{%- if paginator %}
+    {%- set show_pages = paginator.pages -%}
+{% else %}
+    {%- set show_pages = section.pages -%}
+{% endif -%}
+
+<ul class="post-list">
+    {% for page in show_pages %}
+        <li class="post">
+            {%- if page.draft %}
+                <strong>*</strong>
+            {% endif -%}
+
+            {%- if page.date %}
+            <time>{{ page.date | date(format="%Y-%m-%d") }}</time>
+            {% endif -%}
+
+            <a href="{{ page.permalink }}">{{page.title}}</a>
+
+            {% if page.description %}
+                <span class="description">{{ page.description }}</span>
+            {% elif page.summary %}
+                <span class="description">{{ page.summary | safe }}&hellip;</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock main_content %}

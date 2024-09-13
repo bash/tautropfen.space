@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="fediverse:creator" content="{{ config.extra.meta.me }}" />
+    <title>{% block title %}{% if page %}{{page.title}}{% elif section %}{{section.title}}{% else %}{{config.title}}{% endif %}{% endblock title %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ get_url(path="main.css", cachebust = true) }}" crossorigin="anonymous">
+
+    {# RSS #}
+    {% for feed in config.extra.feeds %}
+        {% set section = get_section(path=feed, metadata_only=true) %}
+        {% if not section.generate_feeds %}
+            {{ throw(message="Section '" ~ section.path ~ "' doesn't have feeds enabled") }}
+        {% endif %}
+        {% for filename in config.feed_filenames %}
+            <link rel="alternate" type="application/atom+xml"
+                  title="{{section.title}}"
+                  href="{{ get_url(path=section.path ~ filename, trailing_slash=false) }}">
+        {% endfor %}
+    {% endfor %}
+</head>
+<body>
+    <a href="#main" tabindex="0" class="skip-link">Skip to content</a>
+
+    <nav>
+        🌟 <a href="{{ get_url(path='/') }}">tautropfen.space</a>
+    </nav>
+
+    <main id="main">
+        {% block main_content %}
+            Nothing here?!
+        {% endblock main_content %}
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            a website by <a href="https://tau.garden">Tau</a>~
+        </div>
+    </footer>
+</body>
+</html>

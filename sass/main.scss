@@ -1,0 +1,128 @@
+@import '_reset.scss';
+@import '_fonts.scss';
+
+:root {
+    --block-gap: 1rem;
+    --section-gap: 2.4rem;
+    --link-color: #078aed;
+    --code-color: #d85900;
+    --background-color: #fff;
+    @media (prefers-color-scheme: dark) {
+        --code-color: #da5b04;
+        --background-color: #000;
+    }
+}
+
+:root {
+    font-family: 'Fira Code', monospace;
+    font-variant-ligatures: none;
+    background-color: var(--background-color);
+}
+
+a {
+    color: var(--link-color);
+}
+
+h1, h2, h3, h4, p, ul, ol, blockquote {
+    margin-bottom: var(--block-gap);
+}
+
+// Headings create a new "section" so we want space between the sections
+// ... but not between a section and a direct subsection
+:is(h1, h2, h3, h4):not(:is(h1 + h2, h2 + h3, h3 + h4)):not(:first-child) {
+    margin-top: var(--section-gap);
+}
+
+.footnote-definition {
+    margin-top: var(--section-gap);
+    --block-gap: .5rem;
+}
+
+.footnote-definition + .footnote-definition {
+    margin-top: 0;
+}
+
+blockquote :last-child,
+:is(ol, ul) :is(ol, ul) {
+    margin-bottom: 0;
+}
+
+hr {
+    margin: var(--section-gap) 0;
+    text-align: center;
+    &::before { content: '⁂'; }
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+code, pre {
+    font-family: inherit;
+    font-variant-ligatures: normal;
+    color: var(--code-color);
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 1fr minmax(0, 40rem) 1fr;
+    grid-template-rows: auto 1fr auto;
+    padding: calc(1.5 * var(--block-gap));
+    grid-row-gap: var(--section-gap);
+}
+
+nav, main, footer {
+    grid-column: 2;
+}
+
+footer {
+    @media (prefers-contrast: no-preference) and (hover: hover) {
+        transition: opacity 125ms;
+
+        &:not(:is(:focus-within, :hover, :has(:active))) {
+            opacity: .4;
+        }
+    }
+}
+
+.skip-link {
+    --skip-link-offset: 0.5rem;
+    position: absolute;
+    top: var(--skip-link-offset);
+    left: var(--skip-link-offset);
+    background-color: color-mix(in oklab, var(--link-color), var(--background-color) 60%);
+    padding: .5em 1em;
+    border-radius: .5em;
+
+    &:not(:focus) {
+        transform: translateY(calc(-100% - var(--skip-link-offset)));
+    }
+}
+
+nav a {
+    font-weight: bold;
+}
+
+.post-list {
+    list-style-type: none;
+    padding-inline: 0;
+
+    > .post {
+        margin-bottom: var(--block-gap);
+    }
+
+    > .post > .description {
+        display: block;
+    }
+}
+
+.footnote-definition-label {
+    float: left;
+    margin-right: 0.5ch;
+}
+
+sup {
+    font-variant: super;
+    font-size: 1em;
+}

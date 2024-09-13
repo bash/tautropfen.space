@@ -1,0 +1,10 @@
+title = "Thoughts, Ramblings and Writings by Tau"
+base_url = "https://tautropfen.space"
+compile_sass = true
+minify_html = true
+
+[extra]
+feeds = ['_index.md']
+
+[extra.meta]
+me = 'https://hachyderm.io/@tautropfli'
