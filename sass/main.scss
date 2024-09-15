@@ -50,6 +50,7 @@ blockquote :last-child,
 hr {
     margin: var(--section-gap) 0;
     text-align: center;
+    font-size: 1.6em;
     &::before { content: '⁂'; }
 }
 
