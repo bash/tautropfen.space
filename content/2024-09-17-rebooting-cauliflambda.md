@@ -16,8 +16,8 @@ That said I think it's time to re-start an old passion project of mine: [Caulifl
 
 Cauliflambda is an attempt at implementing a friendly, embeddable interpreter for lambda calculus.
 My broad goals for this project are:
-* **Embeddability**: It should be easy to use as a library and inject custom definitions, customize timeouts, toggle «language features» off.
-* **Helpful**: Errors should point to the source code and provide suggestions.
+* **Embeddability**: It should be easy to use as a library. That means being able to inject custom definitions, customize timeouts, toggle «language features» off, etc.
+* **Helpful**: Errors should point to the source code and provide helpful suggestions.
 * **Transparent**: The interpreter should explain each step when evaluating your program.
 
 ## Why?
