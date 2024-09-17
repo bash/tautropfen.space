@@ -125,5 +125,10 @@ nav a {
 
 sup {
     font-variant: super;
-    font-size: 1em;
+    font-size: inherit;
+    vertical-align: unset;
+}
+
+.footnote-reference a {
+    text-decoration: none;
 }
