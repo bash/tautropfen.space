@@ -4,4 +4,4 @@ title = "Tau's Writing Space"
 sort_by = "date"
 +++
 
-Thoughts, ramblings and possibly poems by Tau.
+Musings, ramblings and possibly poems by Tau.
